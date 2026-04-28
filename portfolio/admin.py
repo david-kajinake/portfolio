@@ -9,4 +9,5 @@ admin.site.register([
     Message ,
     MyPhoneNumber , 
     MyEmail ,
+    Service ,
 ])
