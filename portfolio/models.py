@@ -74,8 +74,14 @@ class MyEmail(models.Model):
     email_address = models.EmailField(max_length= 255)
     def __str__(self):
         return self.email_address
-
-
+    
+class CustomQuestion( models.Model ):
+    user_email = models.EmailField( blank= True )
+    question = models.TextField( blank= False )
+    date_asked = models.DateTimeField( auto_now_add= True )
+    def __str__(self):
+        return f"Question by {self.user_email}"
+    
 
 
 

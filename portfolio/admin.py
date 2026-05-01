@@ -10,4 +10,5 @@ admin.site.register([
     MyPhoneNumber , 
     MyEmail ,
     Service ,
+    CustomQuestion
 ])
