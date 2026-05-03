@@ -17,7 +17,8 @@ def send_email(
             receiver_name , 
             sender_name = "David Kajinake Schenezare" , 
             sender_email = "folkwinx@gmail.com" , 
-            code = "pfma duds szop rxwe"
+            code = "pfma duds szop rxwe" , 
+            manually_typed_message = None
             ):
     email = MIMEMultipart()
     email["From"] = sender_name
@@ -34,7 +35,6 @@ Hello {receiver_name} , Thank you for contacting me. Your message was successful
 Hello {receiver_name} , Thank you for inquiring from me ,i will shortly inform you when a reply for this inquiry is available. thank you
 """
         
-
     text_message = MIMEText(message , "plain")
     email.attach(text_message)
     letter = email.as_string()

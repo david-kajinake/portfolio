@@ -1,7 +1,6 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from django.http import HttpResponse
 from . models import Project , Technology , Contacter , Message , Service , MyPhoneNumber , MyEmail , CustomQuestion
-import smtplib
 from utils import email_service
 import os
 from django.contrib import messages
@@ -34,8 +33,6 @@ def contact(request):
         contact_name = request.POST.get("name")
         contact_email = request.POST.get("email")
         contact_message = request.POST.get("message")
-
-        #Send email to the user
         
         #Create a Contacter instance in the DB
         #Check whether the email doesn't exist in the DB 
@@ -64,21 +61,26 @@ def contact(request):
                                        
                                      )
            # email_service.sendmail()
-            messages.info(request , "Your message has been received. Check your email's inbox.")
+            messages.info(request , "Your message has been received. Check your email's inbox for further details.")
         except Exception as e:
-            messages.error(request , f"Error: {e}")
+            messages.error(request , f"Email not sent. Please try again")
             return
         #SEND EMAIL TO THE DEVELOPER
-        email_service.notify_developer(
-                                    email_type="contact_auto_reply" ,
-                                    visitor_name= contact_name , 
-                                    visitor_email_address= contact_email ,
-                                    visitor_message= contact_message , 
-                                     )
-        return redirect("contact")
+        try:
+            email_service.notify_developer(
+                                        email_type="contact_auto_reply" ,
+                                        visitor_name= contact_name , 
+                                        visitor_email_address= contact_email ,
+                                        visitor_message= contact_message , 
+                                        )
+            return redirect("contact")
+        
+        except Exception as e:
+            return redirect("contact")
+
+
     #If the redirection is comming from submitted form
     return render(request , "portfolio/contact.html",{
-        "messages": messages,
         #"latest_message": latest_message , 
        # "messages_exists": messages_exists
     })
@@ -93,17 +95,24 @@ def faqs(request):
             question = question_content , 
         )
         #Email the user and the Developer
-        predicted_sender_name = user_email.split("@")[0]
-        email_service.send_email( 
-                                 email_type= "faq_auto_reply" , 
-                                 receiver_email= user_email , 
-                                 receiver_name= predicted_sender_name ,             
-                                 )
+        try:
+            predicted_sender_name = user_email.split("@")[0]
+            email_service.send_email( 
+                                    email_type= "faq_auto_reply" , 
+                                    receiver_email= user_email , 
+                                    receiver_name= predicted_sender_name ,             
+                                    )
+            messages.info(request, f"Your Inquiry was successsfully sent. Check your email's inbox for further details")
+        except Exception as e:
+            messages.error(request, "Message not sent. Please try again")
+            return redirect("faqs")
+        
         email_service.notify_developer( 
                                        email_type= "faq_auto_reply" , 
                                        visitor_name= predicted_sender_name , 
                                        visitor_email_address= user_email , 
                                        visitor_message= question_content ,
                                        )
+        return redirect("faqs")
 
     return render(request , "portfolio/faqs.html")  

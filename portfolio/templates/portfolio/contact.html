@@ -8,9 +8,9 @@
 <section class="contact-page">
     <h1 class="section-title">Get In Touch</h1>
     <h5>
-        {% if messages_exists %}
-            {{ latest_message }}
-        {% endif %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
     </h5>
     <div class="contact-container">
         

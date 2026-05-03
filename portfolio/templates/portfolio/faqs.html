@@ -6,7 +6,13 @@
 {% block content %}
 <section class="faq-page">
     <h1 class="section-title">Frequently Asked Questions</h1>
-    
+
+    <h5>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </h5>
+
     <div class="faq-container">
         
         <details class="faq-item">
