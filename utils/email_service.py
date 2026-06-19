@@ -1,3 +1,4 @@
+from django.conf import settings
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -16,8 +17,8 @@ def send_email(
             receiver_email , 
             receiver_name , 
             sender_name = "David Kajinake Schenezare" , 
-            sender_email = "folkwinx@gmail.com" , 
-            code = "pfma duds szop rxwe" , 
+            sender_email = settings.EMAIL_HOST_USER , 
+            code = settings.EMAIL_HOST_PASSWORD , 
             manually_typed_message = None
             ):
     email = MIMEMultipart()
@@ -38,7 +39,7 @@ Hello {receiver_name} , Thank you for inquiring from me ,i will shortly inform y
     text_message = MIMEText(message , "plain")
     email.attach(text_message)
     letter = email.as_string()
-    server = smtplib.SMTP("smtp.gmail.com",587)
+    server = smtplib.SMTP(settings.EMAIL_HOST,settings.EMAIL_PORT)
     server.starttls()
     attempts = 0
     while attempts < 5 :
@@ -52,7 +53,6 @@ Hello {receiver_name} , Thank you for inquiring from me ,i will shortly inform y
         server.sendmail( sender_email , receiver_email , letter )
         server.quit()
     except Exception as e:
-         
          print(f"Error occured trying to send an email: {e}")
          
     return{
@@ -61,13 +61,13 @@ Hello {receiver_name} , Thank you for inquiring from me ,i will shortly inform y
         "contacter_message": message
     }
 
-def notify_developer(
+def notify_developer( #Self Email
         visitor_name , 
         visitor_email_address ,
         visitor_message ,
         email_type ,
-        self_email = "folkwinx@gmail.com",
-        code ="pfma duds szop rxwe" 
+        self_email = settings.EMAIL_HOST_USER,
+        code = settings.EMAIL_HOST_PASSWORD 
                    ):
     if email_type == "contact_auto_reply":
         message_type = "contacted"
@@ -90,8 +90,11 @@ Here is the message they sent:
     wrapped_body = MIMEText(body)
     email.attach(wrapped_body)
     email_to_send = email.as_string()
-    server = smtplib.SMTP("smtp.gmail.com",587)
+    server = smtplib.SMTP(settings.EMAIL_HOST,settings.EMAIL_PORT)
     server.starttls()
     server.login(self_email,code)
     server.sendmail(self_email , self_email , email_to_send)
     server.quit()
+
+
+

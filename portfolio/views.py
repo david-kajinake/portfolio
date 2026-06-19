@@ -19,10 +19,8 @@ def services(request):
 
 def projects(request):
     projects = Project.objects.all()
-    technologies = Technology.objects.all()
     return render(request , "portfolio/projects.html",{
         "projects": projects, 
-        "technologies": technologies 
     })
 
 def resume(request):
@@ -60,7 +58,7 @@ def contact(request):
                                      receiver_name = contact_name ,
                                        
                                      )
-           # email_service.sendmail()
+    
             messages.info(request , "Your message has been received. Check your email's inbox for further details.")
         except Exception as e:
             messages.error(request , f"Email not sent. Please try again")
