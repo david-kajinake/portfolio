@@ -1,40 +1,34 @@
 {% extends 'portfolio/base.html' %}
 {% load static %}
+
 {% block css_link %}
+ <link rel="stylesheet" href="{% static 'portfolio/css/projects.css' %}?v={{ css_version }}">
  <link rel="stylesheet" href="{% static 'portfolio/css/resume.css' %}?v={{ css_version }}">
 {% endblock %}
+
 {% block content %}
-
-<div class="resume-wrapper">
-    <header class="resume-header">
-        <h1 class="graphic-title">Curriculum Vitae</h1>
-        <div class="accent-bar"></div>
-    </header>
-
-    <div class="resume-card">
-        <object 
-            data="{% static 'portfolio/docs/david-resume.pdf.pdf' %}" 
-            type="application/pdf" 
-            class="pdf-display">
-            
-            <div class="fallback-message">
-                <p>It looks like your browser doesn't support embedded PDFs.</p>
-                <a href="{% static 'portfolio/docs/david-resume.pdf.pdf' %}" class="btn-primary">View Resume Directly</a>
-            </div>
-        </object>
-
-        <footer class="resume-footer">
-            <a href="{% static 'portfolio/docs/david-resume.pdf.pdf' %}" download class="download-link">
-                <span class="icon">↓</span> Download PDF Version
+<section class="resume-page">
+    <div class="resume-header">
+        <h1 class="section-title">My Resume</h1>
+        <div class="resume-actions">
+            <a href="{% static 'portfolio/docs/david_kajinake_resume.pdf' %}" download class="btn-card">
+                Download PDF
             </a>
-        </footer>
+            <a href="{% static 'portfolio/docs/david_kajinake_resume.pdf' %}" target="_blank" class="btn-card outline">
+                Open in New Tab
+            </a>
+        </div>
     </div>
-</div>
-
-
+    
+    <div class="pdf-container">
+        <iframe 
+            src="{% static 'portfolio/docs/david_kajinake_resume.pdf' %}" 
+            title="Resume PDF"
+            loading="lazy">
+            <p>Your browser does not support PDFs. 
+               <a href="{% static 'portfolio/docs/david_kajinake_resume.pdf' %}">Download the PDF</a>.
+            </p>
+        </iframe>
+    </div>
+</section>
 {% endblock %}
-{% block js_link %}
-    <script type="module" src="{% static 'portfolio/js/resume.js' %}?v={{ js_version }}"></script>
-{% endblock %} 
-
-

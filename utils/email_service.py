@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.image import MIMEImage
+from portfolio.models import Contacter
 
 """
 emails come in various types: 
@@ -72,6 +73,7 @@ def notify_developer( #Self Email
     if email_type == "contact_auto_reply":
         message_type = "contacted"
         action = "has contacted you"
+
 
     elif email_type == "faq_auto_reply":
         message_type ="asked a question"

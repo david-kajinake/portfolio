@@ -14,7 +14,7 @@ function redirectPage(pageName){
     document.location.href = url ;
 }
 
-const headerAnchors = [ homeAnchor , servicesAnchor , projectAnchor ]
+const headerAnchors = [ homeAnchor , servicesAnchor , projectAnchor, resumeAnchor ]
 
 for( const anchor of headerAnchors ){
     anchor.addEventListener("click",()=>{
