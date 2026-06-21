@@ -23,6 +23,15 @@ def projects(request):
         "projects": projects, 
     })
 
+def project_detail(request , project_id):
+    project = get_object_or_404(Project , id = project_id)
+    other_projects = Project.objects.exclude(id = project.id)
+    return render(request, "portfolio/project-detail.html",{
+        "project": project , 
+        "other_projects": other_projects
+    })
+
+
 def resume(request):
     return render(request , "portfolio/resume.html")
 

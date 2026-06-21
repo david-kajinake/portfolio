@@ -11,7 +11,8 @@
     
     <div class="projects-grid">
         {% for project in projects %}
-         <article class="project-card" >             <div class="card-image">
+         <article class="project-card" id="{{ project.id }}">             
+            <div class="card-image">
                 <img src="{{ project.image.url }}" alt="{{ project.name }}">
              </div>
              <div class="card-content">
@@ -77,4 +78,8 @@
 
         </div>
 </section>
+{% endblock %}
+{% block js_link %}
+{{ block.super }}
+<script type="module" src="{% static 'portfolio/js/projects.js' %}?v={{ js_version }}"></script>
 {% endblock %}

@@ -2,19 +2,25 @@ from django.db import models
 from django.utils import timezone
 import time
 
+
 def get_time():
     localtime = time.localtime()
     return f"{localtime.tm_year}{localtime.tm_mon}{localtime.tm_yday}{localtime.tm_mday}{localtime.tm_wday}{localtime.tm_hour}{localtime.tm_min}{localtime.tm_sec}"
 
 #Create your models here.z
 class Project(models.Model):
+    id = models.CharField( max_length= 255 , default= get_time , primary_key= True )
     name = models.CharField(max_length = 100)
     description = models.TextField(max_length = 1000)
+    problem_solved = models.TextField( max_length= 1000 )
     github_repo_link = models.CharField(max_length = 1000)
     live_demo_link = models.CharField(max_length = 1000)
     image = models.ImageField(blank= True)
+    date_uploaded = models.DateField( auto_now_add= True )
+
     def __str__(self):
-        return self.name
+        return self.name  
+
 
 class Service(models.Model):
     name = models.CharField(max_length= 250)
@@ -81,7 +87,17 @@ class CustomQuestion( models.Model ):
     date_asked = models.DateTimeField( auto_now_add= True )
     def __str__(self):
         return f"Question by {self.user_email}"
+
+class Contributor( models.Model ):
+    id = models.CharField( max_length= 255 , default= get_time , primary_key= True )
+    name = models.CharField( max_length= 255 )
+    github_link = models.CharField( max_length= 1000 )
+    projects_contributed_on = models.ManyToManyField(Project, name = "contributors")
+    def __str__(self):
+        return self.name
     
+
+
 
 
 

@@ -3,9 +3,9 @@ import time
 def get_time(): 
     local_time = time.localtime()
     current_hour = local_time.tm_hour
-    currnt_minute = local_time.tm_min
+    current_minute = local_time.tm_min
     current_second = local_time.tm_sec
-    return f"{current_hour}{currnt_minute}{current_second}"
+    return f"{current_hour}{current_minute}{current_second}"
 
 def css_js_version(request):
     full_time = get_time()

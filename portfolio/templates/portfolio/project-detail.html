@@ -1,0 +1,73 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block css_link %}
+ <link rel="stylesheet" href="{% static 'portfolio/css/projects.css' %}?v={{ css_version }}">
+ <link rel="stylesheet" href="{% static 'portfolio/css/project-detail.css' %}?v={{ js_version }}">
+{% endblock %}
+
+{% block content %}
+<div class="project-detail-container">
+    
+    <section class="main-project">
+        <div class="main-image">
+            <img src="{{ project.image.url }}" alt="{{ project.name }}">
+        </div>
+        
+        <div class="main-content">
+            <div class="header-row">
+                <h1 class="project-title">{{ project.name }}</h1>
+                <span class="upload-time">Uploaded: {{ project.date_uploaded|date:"F j, Y" }}</span>
+            </div>
+
+            <div class="section-block">
+                <h3>What it Solves</h3>
+                <p>{{ project.problem_solved }}</p>
+            </div>
+
+            <div class="section-block">
+                <h3>Technologies & Tools</h3>
+                <div class="tech-tags">
+                    {% for technology in project.technologies.all %}
+                    <span>{{ technology.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h3>Contributors</h3>
+                <ul class="contributors-list">
+                    {% for contributor in project.contributors.all %}
+                    <li> <a href="{{ contributor.github_link }}">{{ contributor.name }}</a></li>
+                    {% empty %}
+                    <li>Solo Project</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card-actions detail-actions">
+                <a href="{{ project.github_repo_link }}" target="_blank" class="btn-card">GitHub Repo</a>
+                <a href="{{ project.live_demo_link }}" target="_blank" class="btn-card outline">Live Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <aside class="other-projects">
+        <h2>Other Projects</h2>
+        <div class="sidebar-grid">
+            {% for other_project in other_projects %}
+            {% if other_project.id != project.id %}
+            <a href="{% url 'project_detail' other_project.id %}" class="sidebar-card">
+                <img src="{{ other_project.image.url }}" alt="{{ other_project.name }}">
+                <div class="sidebar-info">
+                    <h4>{{ other_project.name }}</h4>
+                    <span class="view-link">View Details &rarr;</span>
+                </div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </aside>
+    
+</div>
+{% endblock %}
