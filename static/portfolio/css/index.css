@@ -1,4 +1,4 @@
-/* --- Hero Section Styling --- */
+/* --- Hero Section Styling (Your Existing Code) --- */
 .hero-section {
     display: flex;
     align-items: center; /* Vertically center content */
@@ -52,6 +52,7 @@
     border-radius: 5px;
     font-weight: bold;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -91,7 +92,66 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* --- Hero Responsiveness --- */
+/* --- Skills & Expertise Section Styling (NEW) --- */
+.skills-section {
+    padding: 60px 0;
+    margin-top: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 40px;
+}
+
+/* Grid Layout for Skill Categories */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* Individual Category Cards */
+.skill-category {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.skill-category h3 {
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--primary-pale);
+    padding-bottom: 10px;
+}
+
+/* Styling the actual skill tags */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.skill-tags span {
+    background-color: var(--primary-pale);
+    color: var(--primary-dark);
+    padding: 8px 16px;
+    border-radius: 25px; /* Pill shape */
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* --- Hero & General Responsiveness --- */
 @media (max-width: 768px) {
     .hero-section {
         flex-direction: column-reverse; /* Puts image on top on mobile */
@@ -118,5 +178,14 @@
     
     .name {
         font-size: 2.2rem;
+    }
+
+    /* Adjust skills section for mobile */
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .skill-category {
+        padding: 20px;
     }
 }

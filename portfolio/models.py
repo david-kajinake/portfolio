@@ -25,7 +25,7 @@ class Project(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length= 250)
     description = models.TextField(max_length=100000)
-    image = models.ImageField(blank= True)
+    image = models.ImageField(blank= True, null= True)
     def __str__(self):
         return self.name
 
@@ -36,13 +36,13 @@ class Technology(models.Model):
     def __str__(self):
         return self.name
 
-class Image(models.Model):
-    photo = models.ImageField(blank= True)
-    project = models.ForeignKey(Project , on_delete= models.DO_NOTHING , related_name= "images" , blank= True )
-    technology = models.ForeignKey(Technology , on_delete= models.DO_NOTHING , related_name= "images"  , blank = True)
-    service = models.ForeignKey(Service , on_delete= models.DO_NOTHING , related_name= "images" , blank= True)
-    def __str__(self):
-        return f"image for {self.photo}"
+# class Image(models.Model):
+#     photo = models.ImageField(blank= True)
+#     project = models.ForeignKey(Project , on_delete= models.DO_NOTHING , related_name= "images" , blank= True )
+#     technology = models.ForeignKey(Technology , on_delete= models.DO_NOTHING , related_name= "images"  , blank = True)
+#     service = models.ForeignKey(Service , on_delete= models.DO_NOTHING , related_name= "images" , blank= True)
+#     def __str__(self):
+#         return f"image for {self.photo}"
 
 class Contacter(models.Model):
     name = models.CharField(max_length= 100)
