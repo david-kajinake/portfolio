@@ -3,7 +3,7 @@
 
 {% block css_link %}
  <link rel="stylesheet" href="{% static 'portfolio/css/projects.css' %}?v={{ css_version }}">
- <link rel="stylesheet" href="{% static 'portfolio/css/project-detail.css' %}?v={{ js_version }}">
+ <link rel="stylesheet" href="{% static 'portfolio/css/project-detail.css' %}?v={{ css_version }}">
 {% endblock %}
 
 {% block content %}
@@ -44,6 +44,23 @@
                     {% endfor %}
                 </ul>
             </div>
+
+            {% if project.extra_images.all %}
+            <section class="project-screenshots">
+                <h3 class="section-subtitle">Project Screenshots</h3>
+                
+                <div class="screenshot-grid">
+                    {% for extra_image in project.extra_images.all %}
+                        {% if extra_image.photo %}
+                        <div class="screenshot-card">
+                            <img src="{{ extra_image.photo.url }}" alt="Screenshot for {{ project.title }}" loading="lazy">
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+            
 
             <div class="card-actions detail-actions">
                 <a href="{{ project.github_repo_link }}" target="_blank" class="btn-card">GitHub Repo</a>

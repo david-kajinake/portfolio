@@ -7,6 +7,7 @@ admin.site.register([
     Technology ,
     Contacter , 
     Message ,
+    ExtraImage , 
     MyPhoneNumber , 
     MyEmail ,
     Service ,
