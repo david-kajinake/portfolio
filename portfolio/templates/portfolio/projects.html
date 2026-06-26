@@ -26,8 +26,12 @@
                     {% endfor %}
                 </div>
                 <div class="card-actions">  
+                    {% if project.github_repo_link %}
                     <a href="{{ project.github_repo_link }}" target="_blank" class="btn-card">GitHub Repo</a>
+                    {% endif %}
+                    {% if project.live_demo_link %}
                     <a href="{{ project.live_demo_link }}" target="_blank" class="btn-card outline">Live Demo</a>
+                    {% endif %}
                 </div>
              </div>
 

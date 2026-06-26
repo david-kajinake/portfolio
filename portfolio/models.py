@@ -13,8 +13,8 @@ class Project(models.Model):
     name = models.CharField(max_length = 100)
     description = models.TextField(max_length = 1000)
     problem_solved = models.TextField( max_length= 1000 )
-    github_repo_link = models.CharField(max_length = 1000)
-    live_demo_link = models.CharField(max_length = 1000)
+    github_repo_link = models.CharField(max_length = 1000, blank= True, null= True)
+    live_demo_link = models.CharField(max_length = 1000, blank= True, null= True )
     image = models.ImageField(blank= True)
     date_uploaded = models.DateField( auto_now_add= True )
 
