@@ -88,7 +88,6 @@ if DATABASE_URL:
     DATABASES = {
         "default": env.db(
             "DATABASE_URL",
-            conn_max_age=600,
         )
     }
 else:
