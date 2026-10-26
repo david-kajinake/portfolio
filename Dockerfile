@@ -32,7 +32,8 @@ EXPOSE 8000
 
 
 #The command to start the server when the container turns ON
-CMD ["sh", "-c", "python manage.py migrate --noinput && python -m gunicorn personal_portfolio.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py collectstatic --noinput && python -m gunicorn personal_portfolio.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
+
 
 
 
