@@ -1,0 +1,239 @@
+/* --- Project Detail Layout --- */
+.project-detail-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 width for main, 1/3 for sidebar */
+    gap: 40px;
+    align-items: start;
+}
+
+/* --- Main Project Area --- */
+.main-project {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.main-image {
+    width: 100%;
+    max-height: 450px;
+    background-color: var(--primary-pale);
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-content {
+    padding: 30px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--primary-pale);
+    padding-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.project-title {
+    color: var(--primary-dark);
+    font-size: 2rem;
+}
+
+.upload-time {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: bold;
+    background-color: var(--primary-pale);
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+
+.section-block {
+    margin-bottom: 30px;
+}
+
+.section-block h3 {
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+    font-size: 1.3rem;
+}
+
+.section-block p {
+    color: var(--text-color);
+    line-height: 1.8;
+}
+
+/* Contributors Styling */
+.contributors-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.contributors-list li {
+    display: inline-block;
+    background-color: var(--white);
+    color: var(--primary-dark);
+    padding: 6px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 1px dashed var(--primary-dark);
+}
+
+/* Action Buttons override for detail page */
+.detail-actions {
+    margin-top: 35px;
+}
+
+.detail-actions .btn-card {
+    padding: 12px 30px;
+    font-size: 1rem;
+    max-width: 250px;
+}
+
+/* --- Sidebar: Other Projects --- */
+.other-projects h2 {
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid var(--primary-pale);
+    padding-bottom: 10px;
+}
+
+.sidebar-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-card {
+    display: flex;
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar-card:hover {
+    transform: translateX(5px); /* Slides right slightly on hover */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.sidebar-card img {
+    width: 100px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.sidebar-info {
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar-info h4 {
+    color: var(--primary-dark);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.view-link {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.sidebar-card:hover .view-link {
+    color: var(--primary-dark);
+}
+
+/* --- Responsive Layout Adjustments --- */
+@media (max-width: 992px) {
+    .project-detail-container {
+        grid-template-columns: 1fr; /* Stack layout for smaller screens */
+    }
+    
+    /* Turn sidebar into a horizontal scrolling row or grid on mobile */
+    .sidebar-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-actions {
+        flex-direction: column;
+    }
+    .detail-actions .btn-card {
+        max-width: 100%; /* Make buttons full width on small phones */
+    }
+}
+
+/* --- Project Screenshots Gallery --- */
+.project-screenshots {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid var(--primary-pale); /* A subtle divider line */
+    width: 100%;
+}
+
+.section-subtitle {
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+}
+
+/* Responsive grid that adjusts columns based on screen size */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.screenshot-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Slight zoom effect when hovering over a screenshot */
+.screenshot-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.screenshot-card img {
+    width: 100%;
+    height: 100%;
+    max-height: 250px; /* Prevents extremely tall images from breaking the grid */
+    object-fit: cover; /* Crops the image elegantly if dimensions vary */
+    display: block; 
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .screenshot-grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+    
+    .screenshot-card img {
+        max-height: auto; /* Let the image dictate height on mobile */
+    }
+}

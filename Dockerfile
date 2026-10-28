@@ -32,7 +32,7 @@ EXPOSE 8000
 
 
 #The command to start the server when the container turns ON
-CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py collectstatic --noinput && python -m gunicorn personal_portfolio.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
+CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py collectstatic --noinput && python manage.py shell -c 'import os; from django.contrib.auth import get_user_model; User = get_user_model(); username = os.environ.get(\"DJANGO_SUPERUSER_USERNAME\"); email = os.environ.get(\"DJANGO_SUPERUSER_EMAIL\", \"\"); password = os.environ.get(\"DJANGO_SUPERUSER_PASSWORD\"); exists = User.objects.filter(username=username).exists() if username else False; User.objects.create_superuser(username=username, email=email, password=password) if username and password and not exists else None; print(\"Superuser created.\" if username and password and not exists else \"Superuser creation skipped (credentials missing or username already exists).\")' && python -m gunicorn personal_portfolio.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]
 
 
 
