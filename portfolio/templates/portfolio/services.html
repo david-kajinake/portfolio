@@ -10,9 +10,6 @@
     <div class="services-grid">
         {% for service in services %}
         <article class="service-card" >
-            <div class="card-image">
-                <img src="{{ service.image.url }}" alt="{{ service.name }}">
-            </div>
             <div class="card-content">
                 <h3>{{ service.name }}</h3>
                 <p class="service-desc"> 
